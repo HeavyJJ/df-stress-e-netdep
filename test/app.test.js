@@ -1,6 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { makeServer } from "../src/app.js";
+import { priceWithTax, makeServer } from "../src/app.js";
+
+test("priceWithTax applies 8% tax", () => {
+  assert.equal(priceWithTax(1000), 1080);
+});
+
 test("GET / returns the taxed total", async () => {
   const server = makeServer().listen(0);
   await new Promise((r) => server.once("listening", r));
